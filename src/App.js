@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import "./App.css"
 import useClipboard from "react-use-clipboard";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
@@ -17,6 +17,10 @@ const App = () => {
     successDuration:1000
   });
 
+  useEffect(()=>{
+    setCopyText(transcript);
+  },[transcript])
+
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
@@ -26,7 +30,7 @@ const App = () => {
       <div className="container">
         <h2>Speach to Text Converter</h2>
         <p>An WebApp that provides users with the ability to convert spoken words into written text with ease. This app is designed to allow users to speak into a microphone, and the app will transcribe their speech into text format in real-time.</p>
-        <div className="main-content" onClick={()=>setCopyText(transcript)}>
+        <div className="main-content">
           {transcript}
         </div>
         <div className="btn-style">
