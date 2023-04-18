@@ -7,8 +7,9 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 
 const App = () => {
 
-  const {
+  let {
     transcript,
+    resetTranscript,
     browserSupportsSpeechRecognition
   } = useSpeechRecognition();
 
@@ -25,13 +26,14 @@ const App = () => {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
+
   return (
     <div>
       <div className="container">
         <h2>Speach to Text Converter</h2>
         <p>An WebApp that provides users with the ability to convert spoken words into written text with ease. This app is designed to allow users to speak into a microphone, and the app will transcribe their speech into text format in real-time.</p>
         <div className="main-content">
-          {transcript}
+          {copyText}
         </div>
         <div className="btn-style">
         <button onClick={setCopied}>
@@ -39,6 +41,7 @@ const App = () => {
         </button>
         <button onClick={()=>SpeechRecognition.startListening({continuous:true,language:'en-IN'})}>StartListening</button>
         <button onClick={SpeechRecognition.stopListening}>StopListening</button>
+        <button className='reset-btn' onClick={resetTranscript}>Reset</button>
         </div>
       </div>
     </div>
